@@ -35,17 +35,21 @@ def get_data():
         return main()
 
 def run_dashboard():
-    st.title("Latest AI News")
+    # Başlık ve refresh butonunu aynı satıra yerleştir
+    col_title, col_button = st.columns([4, 1])
+    with col_title:
+        st.title("Latest AI News")
+    with col_button:
+        # Butonu dikey olarak başlıkla hizalamak için biraz boşluk
+        st.write("")
+        if st.button("Refresh News"):
+            st.cache_data.clear()
+            st.rerun()
     
     # Add sidebar for all filters
     with st.sidebar:
         st.header("Filter Options")
-        
-        # Add a refresh button at the top of sidebar
-        if st.button("Refresh News"):
-            # Clear the cache and get fresh data
-            st.cache_data.clear()
-            st.rerun()
+    
     
     # Load data with caching
     try:
